@@ -16,7 +16,7 @@ $(document).ready(function() {
     var value = 0;
 
     if (onSession === true) {
-      value = $('#session-knob').val() * 60;
+      value = $('#nine-minutes-knob').val() * 60;
       $('#timer-display').val(value);
       config.max = value;
       config.fgColor = '#6C6';
@@ -29,7 +29,7 @@ $(document).ready(function() {
       };
     }
     else {
-      var max = $('#break-knob').val() * 60;
+      var max = $('#time-up-knob').val() * 60;
       config.max = max;
       config.fgColor = '#C66';
       config.inputColor = '#C66';
@@ -49,7 +49,7 @@ $(document).ready(function() {
 
   // if knob failed to load, fall back to regular input display
   if (jQuery().knob) {
-    $('#session-knob').knob({
+    $('#nine-minutes-knob').knob({
       'min': 0,
       'max': 120,
       'step': 1,
@@ -59,13 +59,13 @@ $(document).ready(function() {
       'bgColor': '#333',
       'release': function() {
         if (reset) {
-          targetDelta = $('#session-knob').val() * 60000;
+          targetDelta = $('#nine-minutes-knob').val() * 60000;
           setupTimerDisplay();
         }
       }
     });
 
-    $('#break-knob').knob({
+    $('#time-up-knob').knob({
       'min': 0,
       'max': 30,
       'step': 1,
@@ -75,6 +75,16 @@ $(document).ready(function() {
       'bgColor': '#333'
     });
 
+    $('#overtime-knob').knob({
+      'min': 0,
+      'max': 30,
+      'step': 1,
+      'width': 100,
+      'height': 100,
+      'fgColor': '#C66',
+      'bgColor': '#333'
+    });
+    
     $('#timer-display').knob({
       'min': 0,
       'max': 1500,
@@ -102,13 +112,13 @@ $(document).ready(function() {
       if (onSession) {
         if (!mute) $('#snd-endofsession')[0].play(3);
         onSession = false;
-        breakLength = $('#break-knob').val() * 60;
+        breakLength = $('#time-up-knob').val() * 60;
         targetDelta = breakLength * 1000;
       }
       else {
         if (!mute) $('#snd-endofbreak')[0].play();
         onSession = true;
-        targetDelta = $('#session-knob').val() * 60000;
+        targetDelta = $('#nine-minutes-knob').val() * 60000;
       }
       targetTime = new Date(Date.now() + targetDelta);
       setupTimerDisplay();
@@ -117,7 +127,7 @@ $(document).ready(function() {
 
   // button click events
   $('#cmd-reset').click(function() {
-    targetDelta = $('#session-knob').val() * 60000;
+    targetDelta = $('#nine-minutes-knob').val() * 60000;
     if (intervalId) {
       window.clearInterval(intervalId);
       intervalId = undefined;
@@ -134,7 +144,7 @@ $(document).ready(function() {
     targetTime = new Date(Date.now() + targetDelta);
     intervalId = window.setInterval(updateTimer, 200);
     reset = false;
-    breakLength = $('#break-knob').val() * 60;
+    breakLength = $('#time-up-knob').val() * 60;
     $('#cmd-go').addClass('hidden');
     $('#cmd-pause').removeClass('hidden');
     return false;
@@ -164,7 +174,7 @@ $(document).ready(function() {
   });
 
   // initialize timer display
-  targetDelta = $('#session-knob').val() * 60000;
+  targetDelta = $('#nine-minutes-knob').val() * 60000;
   setupTimerDisplay();
 
   // if the audio element is not supported, hide mute button
