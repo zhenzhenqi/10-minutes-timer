@@ -84,7 +84,7 @@ $(document).ready(function() {
       'fgColor': '#C66',
       'bgColor': '#333'
     });
-    
+
     $('#timer-display').knob({
       'min': 0,
       'max': 1500,
@@ -159,19 +159,19 @@ $(document).ready(function() {
   });
 
   // mute button click events
-  $('#cmd-mute').click(function() {
-    mute = true;
-    $('#cmd-mute').addClass('hidden');
-    $('#cmd-unmute').removeClass('hidden');
-    return false;
-  });
-
-  $('#cmd-unmute').click(function() {
-    mute = false;
-    $('#cmd-unmute').addClass('hidden');
-    $('#cmd-mute').removeClass('hidden');
-    return false;
-  });
+  // $('#cmd-mute').click(function() {
+  //   mute = true;
+  //   $('#cmd-mute').addClass('hidden');
+  //   $('#cmd-unmute').removeClass('hidden');
+  //   return false;
+  // });
+  //
+  // $('#cmd-unmute').click(function() {
+  //   mute = false;
+  //   $('#cmd-unmute').addClass('hidden');
+  //   $('#cmd-mute').removeClass('hidden');
+  //   return false;
+  // });
 
   // initialize timer display
   targetDelta = $('#nine-minutes-knob').val() * 60000;
